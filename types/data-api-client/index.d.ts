@@ -12,7 +12,7 @@ import type { ClientConfiguration, Types } from 'aws-sdk/clients/rdsdataservice'
 
 type OmittedValues = 'database' | 'resourceArn' | 'secretArn' | 'schema';
 
-interface iParams {
+export interface iParams {
     secretArn: string;
     resourceArn: string;
     database?: string | undefined;
@@ -28,7 +28,7 @@ interface iParams {
     } | undefined;
 }
 
-interface Transaction {
+export interface Transaction {
     query(sql: string, params?: [] | unknown): Transaction; // params can be [] or {};
     query(
         obj:
@@ -45,7 +45,7 @@ interface Transaction {
     commit: () => Promise<void>;
 }
 
-interface iDataAPIClient {
+export interface iDataAPIClient {
     /* tslint:disable:no-unnecessary-generics */
     query<T = any>(sql: string, params?: [] | unknown): Promise<iDataAPIQueryResult<T>>; // params can be [] or {};
     query<T = any>(obj: {
@@ -65,7 +65,7 @@ interface iDataAPIClient {
     rollbackTransaction: (params: Omit<Types.RollbackTransactionRequest, OmittedValues>) => Promise<any>;
 }
 
-interface iDataAPIQueryResult<T = any> {
+export interface iDataAPIQueryResult<T = any> {
     records: T[];
 }
 
